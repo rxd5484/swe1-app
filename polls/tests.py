@@ -18,6 +18,11 @@ class PollsSmokeTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Favorite color?")
 
+    def test_homepage_loads(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Favorite color?")
+
     def test_vote_updates_choice_count(self):
         url = reverse("polls:vote", args=[self.question.pk])
         response = self.client.post(url, {"choice": self.choice.pk})

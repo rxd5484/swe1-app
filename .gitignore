@@ -2,7 +2,11 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
+.venv/
 .elasticbeanstalk/
+.coverage
+coverage.xml
+htmlcov/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

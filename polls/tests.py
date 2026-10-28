@@ -31,3 +31,8 @@ class PollsSmokeTests(TestCase):
         )
         self.choice.refresh_from_db()
         self.assertEqual(self.choice.votes, 1)
+
+    def test_health_check_accepts_private_ip_host(self):
+        response = self.client.get("/health/", HTTP_HOST="10.0.0.10")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"ok")

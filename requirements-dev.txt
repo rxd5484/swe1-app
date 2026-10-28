@@ -1,0 +1,4 @@
+black>=25,<27
+flake8>=7,<9
+coverage>=7,<9
+coveralls>=4,<6

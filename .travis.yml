@@ -1,0 +1,31 @@
+dist: noble
+language: python
+python:
+  - "3.14"
+
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+
+script:
+  - black --check .
+  - flake8 .
+  - python manage.py check
+  - coverage run --source=polls manage.py test polls
+  - coverage report -m
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: elasticbeanstalk
+  edge: true
+  region: us-east-2
+  app: swe1-app
+  env: swe1-app-env
+  bucket: "$AWS_EB_S3_BUCKET"
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  wait_until_deployed: true
+  on:
+    branch: main
